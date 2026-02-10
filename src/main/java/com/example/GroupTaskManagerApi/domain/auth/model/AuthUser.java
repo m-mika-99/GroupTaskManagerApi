@@ -68,13 +68,13 @@ public class AuthUser {
     /**
      * 既存データから復元する
      *
-     * @param id
-     * @param email
-     * @param passwordHash
-     * @param lastLoginAt
-     * @param lastPasswordChangedAt
-     * @param userId
-     * @return
+     * @param id                    認証ユーザID
+     * @param email                 メアド
+     * @param passwordHash          ハッシュ化パスワード
+     * @param lastLoginAt           最終ログイン日時
+     * @param lastPasswordChangedAt 最終パスワード更新日時
+     * @param userId                ユーザID
+     * @return 復元されたユーザ
      */
     public static AuthUser reconstruct (
             String id,

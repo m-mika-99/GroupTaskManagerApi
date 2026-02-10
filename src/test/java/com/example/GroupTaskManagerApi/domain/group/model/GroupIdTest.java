@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GroupIdTest {
 
     @Test
-    @DisplayName("新規作成で正しく作成されること")
+    @DisplayName("新規作成で正しく作成される")
     void createNew_shouldGenerateValidId () {
         GroupId id = GroupId.createNew();
 
@@ -19,7 +19,7 @@ class GroupIdTest {
     }
 
     @Test
-    @DisplayName("新規作成でランダムにできること")
+    @DisplayName("新規作成でランダムに作成される")
     void createNew_shouldGenerateDifferentIds () {
         GroupId id1 = GroupId.createNew();
         GroupId id2 = GroupId.createNew();
@@ -28,7 +28,7 @@ class GroupIdTest {
     }
 
     @Test
-    @DisplayName("文字列から正しく復元されること")
+    @DisplayName("文字列から正しく復元される")
     void fromString_shouldRestoreSameUuid () {
         UUID uuid = UUID.randomUUID();
         GroupId id = GroupId.fromString(uuid.toString());
@@ -37,7 +37,7 @@ class GroupIdTest {
     }
 
     @Test
-    @DisplayName("不正文字列で例外送出すること")
+    @DisplayName("不正文字列で例外送出する")
     void fromString_shouldThrowException_whenInvalidUuid () {
         assertThrows(
                 IllegalArgumentException.class,

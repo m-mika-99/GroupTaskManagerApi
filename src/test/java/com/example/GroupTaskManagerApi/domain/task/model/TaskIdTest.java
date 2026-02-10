@@ -1,6 +1,5 @@
-package com.example.GroupTaskManagerApi.domain.task;
+package com.example.GroupTaskManagerApi.domain.task.model;
 
-import com.example.GroupTaskManagerApi.domain.task.model.TaskId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TaskIdTest {
 
     @Test
-    @DisplayName("新規作成で正しく作成されること")
+    @DisplayName("新規作成で正しく作成される")
     void createNew_shouldGenerateValidId () {
         TaskId id = TaskId.createNew();
 
@@ -20,7 +19,7 @@ class TaskIdTest {
     }
 
     @Test
-    @DisplayName("新規作成でランダムにできること")
+    @DisplayName("新規作成でランダムに作成される")
     void createNew_shouldGenerateDifferentIds () {
         TaskId id1 = TaskId.createNew();
         TaskId id2 = TaskId.createNew();
@@ -29,7 +28,7 @@ class TaskIdTest {
     }
 
     @Test
-    @DisplayName("文字列から正しく復元されること")
+    @DisplayName("文字列から正しく復元される")
     void fromString_shouldRestoreSameUuid () {
         UUID uuid = UUID.randomUUID();
         TaskId id = TaskId.fromString(uuid.toString());
@@ -38,7 +37,7 @@ class TaskIdTest {
     }
 
     @Test
-    @DisplayName("不正文字列で例外送出すること")
+    @DisplayName("不正文字列で例外送出する")
     void fromString_shouldThrowException_whenInvalidUuid () {
         assertThrows(
                 IllegalArgumentException.class,

@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserIdTest {
 
     @Test
-    @DisplayName("新規作成で正しく作成されること")
+    @DisplayName("新規作成で正しく作成される")
     void createNew_shouldGenerateValidId () {
         UserId id = UserId.createNew();
 
@@ -19,7 +19,7 @@ class UserIdTest {
     }
 
     @Test
-    @DisplayName("新規作成でランダムにできること")
+    @DisplayName("新規作成でランダムに作成される")
     void createNew_shouldGenerateDifferentIds () {
         UserId id1 = UserId.createNew();
         UserId id2 = UserId.createNew();
@@ -28,7 +28,7 @@ class UserIdTest {
     }
 
     @Test
-    @DisplayName("文字列から正しく復元されること")
+    @DisplayName("文字列から正しく復元される")
     void fromString_shouldRestoreSameUuid () {
         UUID uuid = UUID.randomUUID();
         UserId id = UserId.fromString(uuid.toString());
@@ -37,7 +37,7 @@ class UserIdTest {
     }
 
     @Test
-    @DisplayName("不正文字列で例外送出すること")
+    @DisplayName("不正文字列で例外送出する")
     void fromString_shouldThrowException_whenInvalidUuid () {
         assertThrows(
                 IllegalArgumentException.class,

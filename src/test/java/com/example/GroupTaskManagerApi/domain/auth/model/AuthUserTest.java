@@ -118,7 +118,6 @@ class AuthUserTest {
     @Test
     @DisplayName("ID一致してれば他違っても同一")
     void authUsersWithSameId_shouldBeEqual () {
-        AuthUserId id = AuthUserId.createNew();
         UUID uuid = UUID.randomUUID();
 
         AuthUser u1 = AuthUser.reconstruct(
@@ -144,7 +143,6 @@ class AuthUserTest {
     @Test
     @DisplayName("ID不一致なら他すべて一致でも異なる")
     void authUsersWithDifferentId_shouldNotBeEqual () {
-        AuthUserId id = AuthUserId.createNew();
         UUID uuid = UUID.randomUUID();
         LocalDateTime now = LocalDateTime.now();
 

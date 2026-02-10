@@ -28,6 +28,16 @@ public class User {
         return new User(UserId.createNew());
     }
 
+    /**
+     * 既存データから復元する
+     *
+     * @param userId ユーザID
+     * @return 復元されたユーザ
+     */
+    public static User reconstruct (String userId) {
+        return new User(UserId.fromString(userId));
+    }
+
     public UserId getId () {
         return this.id;
     }
