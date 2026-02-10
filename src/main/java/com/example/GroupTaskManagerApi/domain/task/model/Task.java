@@ -1,4 +1,4 @@
-package com.example.GroupTaskManagerApi.domain.task;
+package com.example.GroupTaskManagerApi.domain.task.model;
 
 
 import com.example.GroupTaskManagerApi.domain.group.model.GroupId;
