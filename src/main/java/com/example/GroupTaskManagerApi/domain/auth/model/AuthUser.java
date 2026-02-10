@@ -65,6 +65,35 @@ public class AuthUser {
         );
     }
 
+    /**
+     * 既存データから復元する
+     *
+     * @param id
+     * @param email
+     * @param passwordHash
+     * @param lastLoginAt
+     * @param lastPasswordChangedAt
+     * @param userId
+     * @return
+     */
+    public static AuthUser reconstruct (
+            String id,
+            String email,
+            String passwordHash,
+            LocalDateTime lastLoginAt,
+            LocalDateTime lastPasswordChangedAt,
+            String userId
+    ) {
+        return new AuthUser(
+                AuthUserId.fromString(id),
+                new Email(email),
+                new PasswordHash(passwordHash),
+                lastLoginAt,
+                lastPasswordChangedAt,
+                UserId.fromString(userId)
+        );
+    }
+
     public AuthUserId getId () {
         return id;
     }
