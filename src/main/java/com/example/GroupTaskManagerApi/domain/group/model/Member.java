@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
  * メンバはグループ内においてロールを持ち、ロールによってグループ内での操作可能範囲を制限する。<br>
  * 離脱した場合においても過去所属していた情報として残すことで、離脱後の情報参照に不都合がないようにする。
  * </p>
+ * <p>
+ * TODO: ステータス遷移
  */
 class Member {
 
@@ -48,6 +50,9 @@ class Member {
      * @return 所属情報
      */
     public static Member createNew (UserId userId, MemberRole role) {
+        if (userId == null) throw new IllegalArgumentException("UserId must not be null.");
+        if (role == null) throw new IllegalArgumentException("Role must not be null.");
+
         return new Member(
                 MemberId.createNew(),
                 userId,
@@ -64,7 +69,34 @@ class Member {
      * @return メンバロールで作成された所属情報
      */
     public static Member createNew (UserId userId) {
+        if (userId == null) throw new IllegalArgumentException("UserId must not be null.");
         return createNew(userId, MemberRole.MEMBER);
+    }
+
+    /**
+     * 既存情報から復元する
+     *
+     * @param memberId メンバID
+     * @param userId   ユーザID
+     * @param role     ロール
+     * @param joinedAt 参加日時
+     * @param status   ステータス
+     * @return 復元されたメンバ
+     */
+    public static Member reconstruct (
+            String memberId,
+            String userId,
+            MemberRole role,
+            LocalDateTime joinedAt,
+            MemberStatus status
+    ) {
+        return new Member(
+                MemberId.fromString(memberId),
+                UserId.fromString(userId),
+                role,
+                joinedAt,
+                status
+        );
     }
 
     public UserId getUserId () {
@@ -93,16 +125,8 @@ class Member {
      * @param newRole 変更先ロール
      */
     public void changeRole (MemberRole newRole) {
+        if (newRole == null) throw new IllegalArgumentException("New role must not be null.");
         role = newRole;
-    }
-
-    /**
-     * メンバステータスを変更する
-     *
-     * @param newStatus 変更先ステータス
-     */
-    public void changeStatus (MemberStatus newStatus) {
-        status = newStatus;
     }
 
     /**

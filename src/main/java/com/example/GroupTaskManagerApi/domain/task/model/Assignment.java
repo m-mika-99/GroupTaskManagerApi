@@ -44,6 +44,26 @@ class Assignment {
         );
     }
 
+    /**
+     * 既存データから復元する
+     *
+     * @param assignedAt 割当日時
+     * @param status     ステータス
+     * @param doneAt     完了日時
+     * @return 復元された割り当て情報
+     */
+    public static Assignment reconstruct (
+            LocalDateTime assignedAt,
+            AssignedTaskStatus status,
+            LocalDateTime doneAt
+    ) {
+        return new Assignment(
+                assignedAt,
+                status,
+                doneAt
+        );
+    }
+
     public LocalDateTime getAssignedAt () {
         return assignedAt;
     }

@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserTest {
     @Test
     @DisplayName("正しく新規作成される")
-    void createNew_shouldInitializeAuthUserCorrectly () {
+    void createNew_shouldInitializeCorrectly () {
 
         User user = User.createNew();
 
@@ -19,7 +19,7 @@ class UserTest {
 
     @Test
     @DisplayName("正しく復元される")
-    void reconstruct_shouldReConstructAuthUserCorrectly () {
+    void reconstruct_shouldReConstructCorrectly () {
         UUID uuid = UUID.randomUUID();
 
         User user = User.reconstruct(uuid.toString());

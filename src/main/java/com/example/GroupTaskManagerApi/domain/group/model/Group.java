@@ -78,6 +78,41 @@ public class Group {
     }
 
     /**
+     * 既存情報から復元する
+     *
+     * @param groupId         グループID
+     * @param name            グループ名
+     * @param description     説明
+     * @param memberSnapshots メンバスナップショット
+     * @return 復元されたグループ
+     */
+    public static Group reconstruct (
+            String groupId,
+            String name,
+            String description,
+            List<MemberSnapshot> memberSnapshots
+    ) {
+        Group group = new Group(
+                GroupId.fromString(groupId),
+                name,
+                description
+        );
+        memberSnapshots.forEach(e ->
+                group.members.put(
+                        e.memberId(),
+                        Member.reconstruct(
+                                e.memberId().value().toString(),
+                                e.userId().value().toString(),
+                                e.role(),
+                                e.joinedAt(),
+                                e.status()
+                        )
+                )
+        );
+        return group;
+    }
+
+    /**
      * 名前の整合性チェック
      * <list>
      * <li> NULLでないこと</li>

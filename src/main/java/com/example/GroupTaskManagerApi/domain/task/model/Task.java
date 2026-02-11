@@ -92,6 +92,55 @@ public class Task {
     }
 
     /**
+     * 既存データから復元する
+     *
+     * @param taskId              タスクID
+     * @param groupId             グループID
+     * @param issuedAt            発行日時
+     * @param issuerId            発行者メンバID
+     * @param title               タイトル
+     * @param description         説明
+     * @param deadlineAt          〆切日時
+     * @param status              ステータス
+     * @param assignmentSnapshots 割当リスト
+     * @return 復元されたタスク情報
+     */
+    public static Task reconstruct (
+            String taskId,
+            String groupId,
+            LocalDateTime issuedAt,
+            String issuerId,
+            String title,
+            String description,
+            LocalDateTime deadlineAt,
+            TaskStatus status,
+            List<AssignmentSnapshot> assignmentSnapshots
+    ) {
+        Task task = new Task(
+                TaskId.fromString(taskId),
+                GroupId.fromString(groupId),
+                issuedAt,
+                MemberId.fromString(issuerId),
+                title,
+                description,
+                deadlineAt, status
+        );
+
+        assignmentSnapshots.forEach(e ->
+                task.assignments.put(
+                        e.memberId(),
+                        Assignment.reconstruct(
+                                e.assignedAt(),
+                                e.status(),
+                                e.doneAt()
+                        )
+                )
+        );
+
+        return task;
+    }
+
+    /**
      * タイトルの整合性チェック
      * <list>
      * <li> NULLでないこと</li>
@@ -120,7 +169,7 @@ public class Task {
      */
     public void assign (MemberId assigneeId) {
         if (assigneeId == null) throw new IllegalArgumentException("AssigneeId must not be null.");
-        if (isAssigned(assigneeId)) throw new IllegalArgumentException("Already assigned.");
+        if (isAssigned(assigneeId)) throw new IllegalStateException("Already assigned.");
         this.assignments.put(assigneeId, Assignment.createNew());
     }
 
