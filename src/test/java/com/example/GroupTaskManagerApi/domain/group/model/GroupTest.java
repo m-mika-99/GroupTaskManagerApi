@@ -224,15 +224,178 @@ class GroupTest {
     }
 
     @Test
-    void addMember () {
+    @DisplayName("ロール指定メンバ追加")
+    void addMember_withRole () {
+        UUID groupId = UUID.randomUUID();
+        String name = "groupName";
+        String description = "groupDescription";
+
+        UUID memberId = UUID.randomUUID();
+        UUID userId = UUID.randomUUID();
+        MemberRole role = MemberRole.OWNER;
+        MemberStatus status = MemberStatus.JOINED;
+        LocalDateTime joinedAt = LocalDateTime.now();
+        MemberSnapshot memberSnapshot = new MemberSnapshot(
+                MemberId.fromString(memberId.toString()),
+                UserId.fromString(userId.toString()),
+                role,
+                status,
+                joinedAt
+        );
+
+        Group group = Group.reconstruct(
+                groupId.toString(),
+                name,
+                description,
+                List.of(memberSnapshot)
+        );
+
+        UserId additionalUserId = UserId.createNew();
+        MemberRole additionalMemberRole = MemberRole.ADMIN;
+
+        group.addMember(additionalUserId, additionalMemberRole);
+
+        assertEquals(2, group.getMemberSnapshots().size());
+        assertTrue(group.hasUserInMember(additionalUserId));
     }
 
     @Test
-    void testAddMember () {
+    @DisplayName("ロール指定メンバ追加時、User未指定で例外送出")
+    void addMember_withRole_errorWhenUserIdIsNull () {
+        UUID groupId = UUID.randomUUID();
+        String name = "groupName";
+        String description = "groupDescription";
+
+        UUID memberId = UUID.randomUUID();
+        UUID userId = UUID.randomUUID();
+        MemberRole role = MemberRole.OWNER;
+        MemberStatus status = MemberStatus.JOINED;
+        LocalDateTime joinedAt = LocalDateTime.now();
+        MemberSnapshot memberSnapshot = new MemberSnapshot(
+                MemberId.fromString(memberId.toString()),
+                UserId.fromString(userId.toString()),
+                role,
+                status,
+                joinedAt
+        );
+
+        Group group = Group.reconstruct(
+                groupId.toString(),
+                name,
+                description,
+                List.of(memberSnapshot)
+        );
+
+        UserId additionalUserId = UserId.createNew();
+        MemberRole additionalMemberRole = MemberRole.ADMIN;
+
+        assertThrows(IllegalArgumentException.class, () ->
+                group.addMember(null, additionalMemberRole)
+        );
     }
 
     @Test
+    @DisplayName("ロール指定メンバ追加時、Role未指定で例外送出")
+    void addMember_withRole_errorWhenRoleIsNull () {
+        UUID groupId = UUID.randomUUID();
+        String name = "groupName";
+        String description = "groupDescription";
+
+        UUID memberId = UUID.randomUUID();
+        UUID userId = UUID.randomUUID();
+        MemberRole role = MemberRole.OWNER;
+        MemberStatus status = MemberStatus.JOINED;
+        LocalDateTime joinedAt = LocalDateTime.now();
+        MemberSnapshot memberSnapshot = new MemberSnapshot(
+                MemberId.fromString(memberId.toString()),
+                UserId.fromString(userId.toString()),
+                role,
+                status,
+                joinedAt
+        );
+
+        Group group = Group.reconstruct(
+                groupId.toString(),
+                name,
+                description,
+                List.of(memberSnapshot)
+        );
+
+        UserId additionalUserId = UserId.createNew();
+        MemberRole additionalMemberRole = MemberRole.ADMIN;
+
+        assertThrows(IllegalArgumentException.class, () ->
+                group.addMember(additionalUserId, null)
+        );
+    }
+
+    @Test
+    @DisplayName("ロール指定メンバ追加時、Role未指定で例外送出")
+    void addMember_withRole_errorWhenAlreadyAdded () {
+        UUID groupId = UUID.randomUUID();
+        String name = "groupName";
+        String description = "groupDescription";
+
+        UUID memberId = UUID.randomUUID();
+        UUID userId = UUID.randomUUID();
+        MemberRole role = MemberRole.OWNER;
+        MemberStatus status = MemberStatus.JOINED;
+        LocalDateTime joinedAt = LocalDateTime.now();
+        MemberSnapshot memberSnapshot = new MemberSnapshot(
+                MemberId.fromString(memberId.toString()),
+                UserId.fromString(userId.toString()),
+                role,
+                status,
+                joinedAt
+        );
+
+        Group group = Group.reconstruct(
+                groupId.toString(),
+                name,
+                description,
+                List.of(memberSnapshot)
+        );
+
+        UserId additionalUserId = UserId.createNew();
+        MemberRole additionalMemberRole = MemberRole.ADMIN;
+        group.addMember(additionalUserId, additionalMemberRole);
+
+        assertThrows(IllegalStateException.class, () ->
+                group.addMember(additionalUserId, additionalMemberRole)
+        );
+    }
+
+    @Test
+    @DisplayName("ロール変更")
     void changeRole () {
+        UUID groupId = UUID.randomUUID();
+        String name = "groupName";
+        String description = "groupDescription";
+
+        UUID memberId = UUID.randomUUID();
+        UUID userId = UUID.randomUUID();
+        MemberRole role = MemberRole.OWNER;
+        MemberStatus status = MemberStatus.JOINED;
+        LocalDateTime joinedAt = LocalDateTime.now();
+        MemberSnapshot memberSnapshot = new MemberSnapshot(
+                MemberId.fromString(memberId.toString()),
+                UserId.fromString(userId.toString()),
+                role,
+                status,
+                joinedAt
+        );
+
+        Group group = Group.reconstruct(
+                groupId.toString(),
+                name,
+                description,
+                List.of(memberSnapshot)
+        );
+
+        UserId additionalUserId = UserId.createNew();
+        MemberRole additionalMemberRole = MemberRole.ADMIN;
+        group.addMember(additionalUserId, additionalMemberRole);
+
     }
 
     @Test

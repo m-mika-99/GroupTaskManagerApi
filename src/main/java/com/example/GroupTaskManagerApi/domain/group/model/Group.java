@@ -195,14 +195,16 @@ public class Group {
      *
      * @param userId 追加対象ユーザ
      * @param role   追加時ロール
+     * @return 追加されたメンバのID
      * @throws IllegalArgumentException すでにメンバに含まれる
      */
-    public void addMember (UserId userId, MemberRole role) {
+    public MemberId addMember (UserId userId, MemberRole role) {
         if (userId == null) throw new IllegalArgumentException("UserId must not be null.");
         if (role == null) throw new IllegalArgumentException("Role must not be null.");
-        if (hasUserInMember(userId)) throw new IllegalArgumentException("User already contained.");
+        if (hasUserInMember(userId)) throw new IllegalStateException("User already contained.");
         Member member = Member.createNew(userId, role);
         members.put(member.getId(), member);
+        return member.getId();
     }
 
     /**
@@ -210,8 +212,8 @@ public class Group {
      *
      * @param userId 追加対象
      */
-    public void addMember (UserId userId) {
-        addMember(userId, MemberRole.MEMBER);
+    public MemberId addMember (UserId userId) {
+        return addMember(userId, MemberRole.MEMBER);
     }
 
     /**
