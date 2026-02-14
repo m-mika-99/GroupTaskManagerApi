@@ -12,11 +12,14 @@ package com.example.GroupTaskManagerApi.domain.user.model;
 public class User {
 
     private final UserId id;
+    private final String displayName;
 
     private User (
-            UserId id
+            UserId id,
+            String displayName
     ) {
         this.id = id;
+        this.displayName = displayName;
     }
 
     /**
@@ -25,7 +28,8 @@ public class User {
      * @return 作成したユーザ
      */
     public static User createNew () {
-        return new User(UserId.createNew());
+        // FIXME
+        return new User(UserId.createNew(), "sample");
     }
 
     /**
@@ -34,12 +38,16 @@ public class User {
      * @param userId ユーザID
      * @return 復元されたユーザ
      */
-    public static User reconstruct (String userId) {
-        return new User(UserId.fromString(userId));
+    public static User reconstruct (String userId, String displayName) {
+        return new User(UserId.fromString(userId), displayName);
     }
 
     public UserId getId () {
         return this.id;
+    }
+
+    public String getDisplayName () {
+        return this.displayName;
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.example.GroupTaskManagerApi.infra.onMemoryRepository;
+package com.example.GroupTaskManagerApi.infra.repository.onMemoryRepository;
 
 import com.example.GroupTaskManagerApi.domain.auth.AuthRepository;
 import com.example.GroupTaskManagerApi.domain.auth.model.AuthUser;
@@ -27,11 +27,11 @@ public class AuthUserOnMemoryRepository implements AuthRepository {
         this.passwordEncoder = passwordEncoder;
         users.add(
                 AuthUser.createNew(
-                        new Email("hoge@sample.com"),
+                        new Email("user@example.com"),
                         new PasswordHash(
-                                passwordEncoder.encode("mypassword")
+                                passwordEncoder.encode("string")
                         ),
-                        UserId.createNew()
+                        UserId.fromString("f2566ee5-c7ef-56de-818a-240fb7b3b330")
                 )
         );
 
