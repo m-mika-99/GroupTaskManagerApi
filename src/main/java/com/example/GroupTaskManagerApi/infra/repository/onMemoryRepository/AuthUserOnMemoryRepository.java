@@ -27,9 +27,9 @@ public class AuthUserOnMemoryRepository implements AuthRepository {
         this.passwordEncoder = passwordEncoder;
         users.add(
                 AuthUser.createNew(
-                        new Email("user@example.com"),
+                        new Email("taro@example.com"),
                         new PasswordHash(
-                                passwordEncoder.encode("string")
+                                passwordEncoder.encode("mypassword")
                         ),
                         UserId.fromString("f2566ee5-c7ef-56de-818a-240fb7b3b330")
                 )

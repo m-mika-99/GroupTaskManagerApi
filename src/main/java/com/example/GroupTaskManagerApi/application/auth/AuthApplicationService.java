@@ -6,6 +6,7 @@ import com.example.GroupTaskManagerApi.domain.auth.model.AuthUser;
 import com.example.GroupTaskManagerApi.infra.security.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AuthApplicationService {
@@ -25,6 +26,7 @@ public class AuthApplicationService {
         this.jwtTokenProvider = jwtTokenProvide;
     }
 
+    @Transactional
     public String login (String email, String rawPassword) {
 
         AuthUser user = authRepository.findByEmail(email)
