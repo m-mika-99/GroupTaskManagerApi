@@ -132,7 +132,7 @@ public class AuthUser {
      */
     public void verifyPassword (String raw, PasswordHashEncoder encoder) {
         // FIXME 投げる例外の種類とコメント
-        if (!encoder.matches(raw, passwordHash)) throw new RuntimeException();
+        if (!encoder.matches(raw, passwordHash)) throw new RuntimeException("invalid email or password");
     }
 
     /**
