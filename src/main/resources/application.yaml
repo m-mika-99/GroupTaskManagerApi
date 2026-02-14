@@ -1,3 +1,6 @@
 spring:
   application:
     name: GroupTaskManagerApi
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
