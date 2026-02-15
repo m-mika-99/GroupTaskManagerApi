@@ -4,6 +4,8 @@ import com.example.GroupTaskManagerApi.domain.auth.AuthRepository;
 import com.example.GroupTaskManagerApi.domain.auth.model.AuthUser;
 import com.example.GroupTaskManagerApi.domain.auth.model.Email;
 import com.example.GroupTaskManagerApi.domain.auth.model.PasswordHash;
+import com.example.GroupTaskManagerApi.domain.group.model.Group;
+import com.example.GroupTaskManagerApi.domain.user.model.User;
 import com.example.GroupTaskManagerApi.domain.user.model.UserId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -50,5 +52,10 @@ public class AuthUserOnMemoryRepository implements AuthRepository {
         );
 
         users.add(user);
+    }
+
+    @Override
+    public void saveNewUser (AuthUser authUser, User user, Group group) {
+
     }
 }

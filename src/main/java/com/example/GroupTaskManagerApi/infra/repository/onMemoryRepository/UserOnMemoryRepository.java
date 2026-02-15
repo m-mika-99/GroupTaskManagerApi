@@ -27,4 +27,8 @@ public class UserOnMemoryRepository implements UserRepository {
     public Optional<User> findById (UserId userId) {
         return users.stream().filter(u -> u.getId().equals(userId)).findFirst();
     }
+
+    @Override
+    public void save (User user) {
+    }
 }

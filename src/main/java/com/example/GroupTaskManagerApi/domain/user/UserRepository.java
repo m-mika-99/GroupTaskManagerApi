@@ -16,4 +16,11 @@ public interface UserRepository {
      * @return 見つからなければNULL
      */
     Optional<User> findById (UserId userId);
+
+    /**
+     * 保存
+     *
+     * @param user 保存対象
+     */
+    void save (User user);
 }

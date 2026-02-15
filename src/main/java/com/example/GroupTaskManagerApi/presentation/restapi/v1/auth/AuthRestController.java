@@ -2,6 +2,7 @@ package com.example.GroupTaskManagerApi.presentation.restapi.v1.auth;
 
 import com.example.GroupTaskManagerApi.application.auth.AuthApplicationService;
 import com.example.GroupTaskManagerApi.presentation.restapi.v1.auth.request.LoginRequest;
+import com.example.GroupTaskManagerApi.presentation.restapi.v1.auth.request.SignupRequest;
 import com.example.GroupTaskManagerApi.presentation.restapi.v1.auth.response.LoginResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -54,6 +55,28 @@ public class AuthRestController {
         );
 
         return ResponseEntity.ok(new LoginResponse(token));
+    }
+
+    @PostMapping("/signup")
+    @Operation(description = "新規登録")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "成功"),
+//            @ApiResponse(responseCode = "400", description = "リクエスト不正"),
+//            @ApiResponse(responseCode = "401", description = "認証"),
+//            @ApiResponse(responseCode = "404", description = "グループ、タスクが不存在"),
+//            @ApiResponse(responseCode = "500", description = "サーバエラー"),
+    })
+    public ResponseEntity<Void> signup (
+            @RequestBody
+            @Valid
+            SignupRequest request
+    ) {
+        authService.signup(
+                request.email(),
+                request.password(),
+                request.displayName()
+        );
+        return ResponseEntity.ok().build();
     }
 
 }

@@ -14,6 +14,5 @@ public class UroboroSqlConfig {
     public SqlConfig sqlConfig (DataSource dataSource) {
         return UroboroSQL.builder(dataSource)
                 .build();
-
     }
 }

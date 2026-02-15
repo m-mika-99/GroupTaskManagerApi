@@ -18,4 +18,9 @@ public class BcryptPasswordHashEncoder implements PasswordHashEncoder {
     public boolean matches (String raw, PasswordHash hash) {
         return passwordEncoder.matches(raw, hash.value());
     }
+
+    @Override
+    public String encode (String raw) {
+        return passwordEncoder.encode(raw);
+    }
 }

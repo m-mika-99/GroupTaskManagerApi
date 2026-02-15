@@ -33,6 +33,16 @@ public class User {
     }
 
     /**
+     * IDを新規発番して新たなユーザ情報を作成
+     *
+     * @return 作成したユーザ
+     */
+    public static User createNew (String displayName) {
+        // FIXME
+        return new User(UserId.createNew(), displayName);
+    }
+
+    /**
      * 既存データから復元する
      *
      * @param userId ユーザID

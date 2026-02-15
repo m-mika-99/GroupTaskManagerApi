@@ -7,4 +7,6 @@ import com.example.GroupTaskManagerApi.domain.auth.model.PasswordHash;
  */
 public interface PasswordHashEncoder {
     boolean matches (String raw, PasswordHash hash);
+
+    String encode (String raw);
 }
