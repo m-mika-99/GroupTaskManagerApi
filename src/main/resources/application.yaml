@@ -13,3 +13,12 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
+
+logging:
+  level:
+    # FIXME
+    jp.co.future.uroborosql.sql: TRACE
+    jp.co.future.uroborosql.log: DEBUG
+    jp.co.future.uroborosql.performance: DEBUG
+    org.springframework.jdbc.core: DEBUG
+    org.springframework.jdbc.datasource: DEBUG

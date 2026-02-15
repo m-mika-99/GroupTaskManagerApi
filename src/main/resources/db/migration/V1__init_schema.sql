@@ -4,8 +4,8 @@
 CREATE TABLE users (
 	id						UUID			PRIMARY KEY
 ,	display_name			VARCHAR(256)	NOT NULL
-,	created_at				TIMESTAMPTZ 	NOT NULL	DEFAULT CURRENT_TIMESTAMP
-,	updated_at				TIMESTAMPTZ 	NOT NULL	DEFAULT CURRENT_TIMESTAMP
+,	created_at				TIMESTAMP 	    NOT NULL	DEFAULT CURRENT_TIMESTAMP
+,	updated_at				TIMESTAMP    	NOT NULL	DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -17,10 +17,10 @@ CREATE TABLE auth_users (
 ,	email					VARCHAR(256)	NOT NULL	UNIQUE
 ,	password_hash			VARCHAR(256)	NOT NULL
 ,	user_id					UUID			NOT NULL
-,	last_login_at			TIMESTAMPTZ
-,	last_pw_changed_at		TIMESTAMPTZ
-,	created_at				TIMESTAMPTZ 	NOT NULL	DEFAULT CURRENT_TIMESTAMP
-,	updated_at				TIMESTAMPTZ 	NOT NULL	DEFAULT CURRENT_TIMESTAMP
+,	last_login_at			TIMESTAMP
+,	last_pw_changed_at		TIMESTAMP
+,	created_at				TIMESTAMP    	NOT NULL	DEFAULT CURRENT_TIMESTAMP
+,	updated_at				TIMESTAMP    	NOT NULL	DEFAULT CURRENT_TIMESTAMP
 
 ,	CONSTRAINT fk_auth_user_user
 		FOREIGN KEY (user_id)
@@ -35,8 +35,8 @@ CREATE TABLE groups (
 	id						UUID			PRIMARY KEY
 ,	name					VARCHAR(256)	NOT NULL
 ,	description				TEXT
-,	created_at				TIMESTAMPTZ 	NOT NULL	DEFAULT CURRENT_TIMESTAMP
-,	updated_at				TIMESTAMPTZ 	NOT NULL	DEFAULT CURRENT_TIMESTAMP
+,	created_at				TIMESTAMP    	NOT NULL	DEFAULT CURRENT_TIMESTAMP
+,	updated_at				TIMESTAMP    	NOT NULL	DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -47,12 +47,12 @@ CREATE TABLE members (
 	id						UUID			PRIMARY KEY
 ,	user_id					UUID			NOT NULL
 ,	group_id				UUID			NOT NULL
-,	joined_at				TIMESTAMPTZ 	NOT NULL
+,	joined_at				TIMESTAMP    	NOT NULL
 ,	role_code				smallint		NOT NULL
 ,	display_name_override	VARCHAR(256)
 ,	status_code				smallint		NOT NULL
-,	created_at				TIMESTAMPTZ 	NOT NULL	DEFAULT CURRENT_TIMESTAMP
-,	updated_at				TIMESTAMPTZ 	NOT NULL	DEFAULT CURRENT_TIMESTAMP
+,	created_at				TIMESTAMP    	NOT NULL	DEFAULT CURRENT_TIMESTAMP
+,	updated_at				TIMESTAMP    	NOT NULL	DEFAULT CURRENT_TIMESTAMP
 
 ,	UNIQUE (group_id, user_id)
 
@@ -77,12 +77,12 @@ CREATE TABLE tasks (
 ,	title					VARCHAR(256)	NOT NULL
 ,	description				TEXT
 ,	issuer_member_id		UUID			NOT NULL
-,	issued_at				TIMESTAMPTZ		NOT NULL
-,	deadline_at				TIMESTAMPTZ		NOT NULL
+,	issued_at				TIMESTAMP		NOT NULL
+,	deadline_at				TIMESTAMP		NOT NULL
 ,	status_code				smallint		NOT NULL
-,	archived_at				TIMESTAMPTZ
-,	created_at				TIMESTAMPTZ 	NOT NULL	DEFAULT CURRENT_TIMESTAMP
-,	updated_at				TIMESTAMPTZ 	NOT NULL	DEFAULT CURRENT_TIMESTAMP
+,	archived_at				TIMESTAMP
+,	created_at				TIMESTAMP    	NOT NULL	DEFAULT CURRENT_TIMESTAMP
+,	updated_at				TIMESTAMP    	NOT NULL	DEFAULT CURRENT_TIMESTAMP
 
 
 ,	CONSTRAINT fk_task_group
@@ -106,9 +106,9 @@ CREATE TABLE assignments (
 	member_id				UUID			NOT NULL
 ,	task_id					UUID			NOT NULL
 ,	status_code				smallint		NOT NULL
-,	done_at					TIMESTAMPTZ
-,	created_at				TIMESTAMPTZ 	NOT NULL	DEFAULT CURRENT_TIMESTAMP
-,	updated_at				TIMESTAMPTZ 	NOT NULL	DEFAULT CURRENT_TIMESTAMP
+,	done_at					TIMESTAMP
+,	created_at				TIMESTAMP    	NOT NULL	DEFAULT CURRENT_TIMESTAMP
+,	updated_at				TIMESTAMP    	NOT NULL	DEFAULT CURRENT_TIMESTAMP
 
 ,	PRIMARY KEY (member_id, task_id)
 
